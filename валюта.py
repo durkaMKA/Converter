@@ -1,0 +1,76 @@
+from tkinter import *
+
+
+window = Tk()
+window.geometry('1200x500')
+window.title('Конвертер валют')
+window.config(bg='green')
+window.iconbitmap('myicon.ico')
+def viborperovodar():
+    nazv3.configure(text='₽:')
+    def perevodd():
+        dol = 'Вывод:{}$'.format(int(float(vod.get())) // 89.12 )
+        nazv2.configure(text=dol)
+    def perevode():
+        euro = 'Вывод:{}€'.format(int(float(vod.get()))// 96.77)
+        nazv2.configure(text=euro)
+    def perevody():
+        yen ='Вывод:{}¥'.format(int(float(vod.get())// 0.591477))
+        nazv2.configure(text=yen)
+    def perevodt():
+        teng ='Вывод:{}₸'.format(int(float(vod.get())// 0.193097))
+        nazv2.configure(text=teng)
+    but = Button(window,text='$',width=10,command=perevodd)
+    but.place(relx=0.2,rely=0.3,anchor='n')
+    but2 = Button(window,text='€',width=10,command=perevode)
+    but2.place(relx=0.2,rely=0.4,anchor='n')
+    but3 =Button(window,text='¥',width=10,command=perevody)
+    but3.place(relx=0.3,rely=0.3, anchor='n')
+    but4 =Button(window,text='₸',width=10,command=perevodt)
+    but4.place(relx=0.3,rely=0.4, anchor='n')
+    nazv5 = Label(window,text='Курсы:',font=('Times New Roman',14),bg='green')
+    nazv5.place(relx=0.0,rely=0.2)
+    nazv6 =Label(window,text='1$ = 89.12₽\n  1€ = 96.77₽\n 1¥ = 0.591477₽\n 1₸ = 0.193097₽\n',font=('Times New Roman',12),bg='green')
+    nazv6.place(relx=0.1,rely=0.3,anchor='n')
+def viborperevodad():
+    nazv3.configure(text='$:')
+    def perevodr():
+        rub = 'Вывод:{}₽'.format(int(float(vod.get()) //0.01122 ))
+        nazv2.configure(text=rub)
+    def perevode():
+        euro = 'Вывод:{}€'.format(int(float(vod.get())// 1.09))
+        nazv2.configure(text=euro)
+    def perevody():
+        yen ='Вывод:{}¥'.format(int(float(vod.get())// 0.006637))
+        nazv2.configure(text=yen)
+    def perevodt():
+        teng ='Вывод:{}₸'.format(int(float(vod.get())// 0.002167))
+        nazv2.configure(text=teng)
+    but = Button(window,text='₽',width=10,command=perevodr)
+    but.place(relx=0.2,rely=0.3,anchor='n')
+    but2 = Button(window,text='€',width=10,command=perevode)
+    but2.place(relx=0.2,rely=0.4,anchor='n')
+    but3 =Button(window,text='¥',width=10,command=perevody)
+    but3.place(relx=0.3,rely=0.3, anchor='n')
+    but4 =Button(window,text='₸',width=10,command=perevodt)
+    but4.place(relx=0.3,rely=0.4, anchor='n')
+    nazv5 = Label(window,text='Курсы:',font=('Times New Roman',14),bg='green')
+    nazv5.place(relx=0.0,rely=0.2)
+    nazv6 =Label(window,text='1₽ = 0.01122$ \n  1€ = 1.09$ \n 1¥ = 0.006637$\n 1₸ = 0.002167$\n',font=('Times New Roman',12),bg='green')
+    nazv6.place(relx=0.1,rely=0.3,anchor='n')
+nazv4 = Label(window,text='Выберите валюту:',font=('Times New Roman',16),bg='green')
+nazv4.place(relx=0.6,rely=0.2,anchor='w')
+nazv3= Label(window,text='?:', font=('Times New Roman',16),bg='green')
+nazv3.place(relx=0.4,rely=0.2,anchor='w')
+nazv2=Label(window,text='Вывод:',font=('Times New Roman',16),bg='green')
+nazv2.place(relx=0.6,rely=0.4,anchor='e')
+nazv = Label(window,text='Введите сумму , чтобы перевести в другую валюту',font=('Times New Roman',20),bg='green')
+nazv.place(relx=0.5,rely=0.1,anchor='s')
+vod = Entry(window,width=30)
+vod.place(relx=0.5,rely=0.2,anchor='n')
+but5 =Button(window,text='₽',width=5,command=viborperovodar)
+but5.place(relx=0.8,rely=0.2, anchor='n')
+but6 =Button(window,text='$',width=5,command=viborperevodad)
+but6.place(relx=0.8,rely=0.3, anchor='n')
+
+window.mainloop()
