@@ -1,55 +1,90 @@
 from tkinter import *
-from tkinter import messagebox 
-
+import random
+import time
 window = Tk()
-window.geometry('800x600')
+window.geometry('700x300')
 window.title('Крестики нолики')
-frm = []; btn = []; who = True
-playArea = []
-standings = []            
-def play(n):
-    global who
-    btn[n].config(text= 'X' if who else 'O', state=DISABLED)
-    playArea[n] = 1 if who else -1
-    standings[0] = playArea[0] + playArea[1] + playArea[2]
-    standings[1] = playArea[3] + playArea[4] + playArea[5]
-    standings[2] = playArea[6] + playArea[7] + playArea[8]
-    standings[3] = playArea[0] + playArea[3] + playArea[6]
-    standings[4] = playArea[1] + playArea[4] + playArea[7]
-    standings[5] = playArea[2] + playArea[5] + playArea[8]
-    standings[6] = playArea[0] + playArea[4] + playArea[8]
-    standings[7] = playArea[2] + playArea[4] + playArea[6]
-    for i in range(8):
-        if standings[i] == 3:
-            messagebox.showinfo(title='Победил...',message='Победил X')
-            window.destroy()
-        elif standings[i] == -3:
-            messagebox.showinfo(title='Победил...',message='Победил O')
-            window.destroy()
-    who = not(who)
-
-for i in range(3):
-    frm.append(Frame())
-    frm[i].pack(expand=YES, fill=BOTH)
-    for j in range(3):
-        btn.append(Button(frm[i], text=' ', font=('Times New Roman', 20, 'bold'), width=3, height=2))
-        btn[i*3+j].config(command=lambda n=i*3+j:play(n))
-        btn[i*3+j].pack(expand=YES, fill=BOTH, side=LEFT, padx=1, pady=1)
-        playArea.append(0)
-        standings.append(0)
-
-mainloop()
 
 
 
+nazv = Label(window,text='Крестики нолики', font = ('Times New Roman', 20, 'bold'),fg='Red')
+buttons = [Button(window,width=5,height=2,font=('Times New Roman', 24, 'bold'),command= lambda x = i:push(x)) for i in range(9)] 
+nazv.place(relx=0.7,rely = 0.3,anchor='center')
 
 
 
+def stopgame():
+    global gamel
+    for item in gamel:
+        buttons[item].config(state='disabled')
+    
+def win(n):
+    global game
+    if (game[0]== n and game[1]== n and game[2]==n) or (game[3]== n and game[4]== n and game[5]==n) or (game[6]== n and game[7]== n and game[8]==n)\
+            or (game[0]== n and game[3]== n and game[6]==n) or (game[1]== n and game[4]== n and game[7]==n) or (game[2]== n and game[5]== n and game[8]==n)\
+            or (game[0]== n and game[4]== n and game[8]==n) or (game[2]== n and game[4]== n and game[6]==n):
+        return True
+turn = 0
+game = [None] * 9
+gamel= list(range(9))
 
+def push(b):
+    global game
+    global gamel
+    global turn
+    game[b]='X'
+    buttons[b].config(text='X',state='disabled')
+    gamel.remove(b)
+    if b ==4 and turn == 0:
+        t = random.choice(gamel)
+    elif b != 4 and turn == 0:
+        t = 4
+    if turn > 0:
+        t= 8 - b
+    if t  not in gamel:
+        try:
+            t = random.choice(gamel)
+        except IndexError:
+            nazv['text']='Ничья!'
+            stopgame()
+    game[t]='O'
+    time.sleep(0.5)
+    buttons[t].config(text='O',state='disabled')
+    if win('X'):
+        nazv['text']='Вы победили!'
+        stopgame()
+    elif win('O'):
+        nazv['text']='Вы проиграли!'
+        stopgame()
+    else:
+        if (len(gamel) > 1):
+            gamel.remove(t)
+        else:
+            nazv['text']='Ничья!'
+            stopgame()
+        turn += 1
 
-
-
+row = 1
+col = 0
+for i in range(9):
+    buttons[i].grid(row=row,column=col)
+    col += 1
+    if col ==3:
+        row +=1
+        col=0
 
 
 
 window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
