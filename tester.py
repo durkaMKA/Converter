@@ -51,6 +51,7 @@ def push(b):
     time.sleep(0.5)
     buttons[t].config(text='O',state='disabled')
     if win('X'):
+        buttons[t].config(text='',state='disabled')
         nazv['text']='Вы победили!'
         stopgame()
     elif win('O'):
